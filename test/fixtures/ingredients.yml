@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  spoon_id: 1
+  recipe_id: 1
+  metric_amount: 1
+  metric_unit: MyString
+  us_amount: 1
+  us_unit: MyString
+  image_url: MyString
+
+two:
+  spoon_id: 1
+  recipe_id: 1
+  metric_amount: 1
+  metric_unit: MyString
+  us_amount: 1
+  us_unit: MyString
+  image_url: MyString

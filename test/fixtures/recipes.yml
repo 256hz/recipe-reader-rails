@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  spoon_id: 1
+  title: MyString
+  cuisine: MyString
+  image_url: MyString
+  ready_in_minutes: 1
+  is_vegetarian: false
+  is_vegan: false
+  source_name: MyString
+  likes: 1
+  steps_length: 1
+
+two:
+  spoon_id: 1
+  title: MyString
+  cuisine: MyString
+  image_url: MyString
+  ready_in_minutes: 1
+  is_vegetarian: false
+  is_vegan: false
+  source_name: MyString
+  likes: 1
+  steps_length: 1
