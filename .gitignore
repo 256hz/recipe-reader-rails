@@ -23,3 +23,6 @@
 /config/master.key
 /config/database.yml
 
+/.blackbox/pubring.gpg~
+/.blackbox/pubring.kbx~
+/.blackbox/secring.gpg
