@@ -1,66 +1,66 @@
 {
-  "results"=>
+  "results":
     [
       {
-        "id"=>761968, 
-        "title"=>"Potato Tacos", 
-        "image"=>"https://spoonacular.com/recipeImages/761968-312x231.jpg", 
-        "imageType"=>"jpg"
+        "id":761968, 
+        "title":"Potato Tacos", 
+        "image":"https://spoonacular.com/recipeImages/761968-312x231.jpg", 
+        "imageType":"jpg"
       }, 
       {
-        "id"=>201683, 
-        "title"=>"Herbed New Potato Salad", 
-        "image"=>"https://spoonacular.com/recipeImages/201683-312x231.jpg", 
-        "imageType"=>"jpg"
+        "id":201683, 
+        "title":"Herbed New Potato Salad", 
+        "image":"https://spoonacular.com/recipeImages/201683-312x231.jpg", 
+        "imageType":"jpg"
       }, 
-      {"id"=>769796, 
-        "title"=>"French Potato Salad", 
-        "image"=>"https://spoonacular.com/recipeImages/769796-312x231.jpg", 
-        "imageType"=>"jpg"
+      {"id":769796, 
+        "title":"French Potato Salad", 
+        "image":"https://spoonacular.com/recipeImages/769796-312x231.jpg", 
+        "imageType":"jpg"
       }, 
-      {"id"=>385251, 
-        "title"=>"Polish Potato Salad", 
-        "image"=>"https://spoonacular.com/recipeImages/385251-312x231.jpg", 
-        "imageType"=>"jpg"
+      {"id":385251, 
+        "title":"Polish Potato Salad", 
+        "image":"https://spoonacular.com/recipeImages/385251-312x231.jpg", 
+        "imageType":"jpg"
       }, 
-      {"id"=>391325, 
-        "title"=>"Cajun Potato Salad", 
-        "image"=>"https://spoonacular.com/recipeImages/391325-312x231.jpg", 
-        "imageType"=>"jpg"
+      {"id":391325, 
+        "title":"Cajun Potato Salad", 
+        "image":"https://spoonacular.com/recipeImages/391325-312x231.jpg", 
+        "imageType":"jpg"
       }, 
-      {"id"=>423053, 
-        "title"=>"Cinnamon Potato Rolls", 
-        "image"=>"https://spoonacular.com/recipeImages/423053-312x231.jpg", 
-        "imageType"=>"jpg"
-      }, 
-      {
-        "id"=>415054, 
-        "title"=>"Tangy Potato Salad", 
-        "image"=>"https://spoonacular.com/recipeImages/415054-312x231.jpg", 
-        "imageType"=>"jpg"
+      {"id":423053, 
+        "title":"Cinnamon Potato Rolls", 
+        "image":"https://spoonacular.com/recipeImages/423053-312x231.jpg", 
+        "imageType":"jpg"
       }, 
       {
-        "id"=>430977, 
-        "title"=>"Mashed Potato Roses", 
-        "image"=>"https://spoonacular.com/recipeImages/430977-312x231.jpg", 
-        "imageType"=>"jpg"
+        "id":415054, 
+        "title":"Tangy Potato Salad", 
+        "image":"https://spoonacular.com/recipeImages/415054-312x231.jpg", 
+        "imageType":"jpg"
       }, 
       {
-        "id"=>445531, 
-        "title"=>"Broccoli Potato Supreme", 
-        "image"=>"https://spoonacular.com/recipeImages/445531-312x231.jpg", 
-        "imageType"=>"jpg"
+        "id":430977, 
+        "title":"Mashed Potato Roses", 
+        "image":"https://spoonacular.com/recipeImages/430977-312x231.jpg", 
+        "imageType":"jpg"
       }, 
       {
-        "id"=>462320, 
-        "title"=>"Potato Beef Lasagna", 
-        "image"=>"https://spoonacular.com/recipeImages/462320-312x231.jpg", 
-        "imageType"=>"jpg"
+        "id":445531, 
+        "title":"Broccoli Potato Supreme", 
+        "image":"https://spoonacular.com/recipeImages/445531-312x231.jpg", 
+        "imageType":"jpg"
+      }, 
+      {
+        "id":462320, 
+        "title":"Potato Beef Lasagna", 
+        "image":"https://spoonacular.com/recipeImages/462320-312x231.jpg", 
+        "imageType":"jpg"
       }
     ], 
-  "baseUri"=>"https://spoonacular.com/recipeImages/", 
-  "offset"=>0, 
-  "number"=>10, 
-  "totalResults"=>245, 
-  "processingTimeMs"=>398
+  "baseUri":"https://spoonacular.com/recipeImages/", 
+  "offset":0, 
+  "number":10, 
+  "totalResults":245, 
+  "processingTimeMs":398
 }
