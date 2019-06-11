@@ -4,7 +4,8 @@ Rails.application.routes.draw do
       resources :recipes
       resources :steps
       resources :ingredients
-      get '/api', to: 'api#index'
+      get '/spoon', to: 'spoon#index'
+      get '/spoon/:query', to: 'spoon#search'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
