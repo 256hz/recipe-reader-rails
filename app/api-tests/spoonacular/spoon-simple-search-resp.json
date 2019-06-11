@@ -58,9 +58,9 @@
         "imageType"=>"jpg"
       }
     ], 
-    "baseUri"=>"https://spoonacular.com/recipeImages/", 
-    "offset"=>0, 
-    "number"=>10, 
-    "totalResults"=>245, 
-    "processingTimeMs"=>398
-  }
+  "baseUri"=>"https://spoonacular.com/recipeImages/", 
+  "offset"=>0, 
+  "number"=>10, 
+  "totalResults"=>245, 
+  "processingTimeMs"=>398
+}
