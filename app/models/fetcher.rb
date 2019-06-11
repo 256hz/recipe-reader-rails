@@ -10,12 +10,6 @@ class Fetcher
     end
 
     def self.request_search(query)
-        # Unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?query=#{query}&instructionsRequired=true",
-        #     headers:{
-        #         "X-RapidAPI-Host" => "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-        #         "X-RapidAPI-Key" => self.key
-        #     }
-        # )
         HTTParty.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=#{query}&instructionsRequired=true", 
             headers: 
                 {
@@ -36,18 +30,11 @@ class Fetcher
                     readyInMinutes: res['readyInMinutes'],
                 } 
         }
-
+        puts @results
         @results
-        # @results = self.create_results(response)
     end
 
     def self.request_recipe(id)
-        # Unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/#{id}/information",
-        #     headers:{
-        #         "X-RapidAPI-Host" => "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-        #         "X-RapidAPI-Key" => self.key
-        #     }
-        # )
         HTTParty.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/592863/information", 
             headers: 
                 {
