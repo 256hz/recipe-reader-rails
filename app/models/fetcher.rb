@@ -23,16 +23,21 @@ class Fetcher
         response = self.request_search(query)
 
         # @results = @burger_results
-        response["results"].each{ |res| 
-            @results[res['title']] = 
-                {
-                    id: res['id'], 
-                    image_url: response['baseUri'] + res['image'],
-                    readyInMinutes: res['readyInMinutes'],
-                } 
+        if response { 
+            response["results"].each{ |res| 
+                @results[res['title']] = 
+                    {
+                        id: res['id'], 
+                        image_url: response['baseUri'] + res['image'],
+                        readyInMinutes: res['readyInMinutes'],
+                    } 
+            }
+        } else {
+            @results="No recipes found"
         }
         puts @results
         @results
+        }
     end
 
     def self.request_recipe(id)
