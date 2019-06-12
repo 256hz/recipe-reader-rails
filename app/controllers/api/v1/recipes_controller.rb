@@ -5,7 +5,12 @@ class Api::V1::RecipesController < ApplicationController
     end
 
     def show
-        @recipe = Fetcher.get_recipe(params[:id])
+        @recipe = Recipe.all.find_by(spoon_id: params[:id])
+        if @recipe
+            @recipe = Recipe.send_steps(@recipe)
+        else
+            @recipe = Fetcher.get_recipe(params[:id])
+        end
         render json: @recipe
     end
 end
