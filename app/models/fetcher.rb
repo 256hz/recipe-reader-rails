@@ -21,7 +21,7 @@ class Fetcher
 
     def self.search(query)
         response = self.request_search(query)
-
+        @results = {}
         # @results = @burger_results
         if response { 
             response["results"].each{ |res| 
