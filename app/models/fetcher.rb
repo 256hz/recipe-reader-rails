@@ -20,8 +20,9 @@ class Fetcher
     end
 
     def self.search(query)
-        response = self.request_search(query)
-        @results = {}
+        # response = self.request_search(query)
+
+        @results = @burger_results
         response["results"].each{ |res| 
             @results[res['title']] = 
                 {
