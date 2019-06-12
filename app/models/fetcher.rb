@@ -28,7 +28,7 @@ class Fetcher
                 @results[res['title']] = 
                     {
                         id: res['id'], 
-                        image_url: response['baseUri'] + res['image'],
+                        image_url: res['image'],
                         readyInMinutes: res['readyInMinutes'],
                     } 
             }
