@@ -61,7 +61,7 @@ class Fetcher
         # puts "*"*50, "step spoon ids", @steps.each{|s| s.spoon_ids}, "*"*50
         self.associate_step_ingredients(@steps)
         @recipe
-    end
+    end 
 
     def self.create_recipe(response)
         # byebug
