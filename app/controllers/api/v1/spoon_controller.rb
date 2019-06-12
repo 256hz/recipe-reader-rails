@@ -5,7 +5,7 @@ class Api::V1::SpoonController < ApplicationController
   end
 
   def index
-    @recipe = Fetcher.get_recipe(592863)
-    render json: @recipe
+    @recipes = Recipe.all
+    render json: @recipes
   end
 end
