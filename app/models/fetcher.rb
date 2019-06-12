@@ -10,7 +10,7 @@ class Fetcher
     end
 
     def self.request_search(query)
-        HTTParty.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=#{query}&instructionsRequired=true", 
+        HTTParty.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex?query=#{query}&instructionsRequired=true", 
             headers: 
                 {
                     "X-RapidAPI-Host" => "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -22,7 +22,7 @@ class Fetcher
     def self.search(query)
         response = self.request_search(query)
         # @results = @burger_results
-        if response { 
+        if response  
             @results = {}
             response["results"].each{ |res| 
                 @results[res['title']] = 
@@ -32,12 +32,11 @@ class Fetcher
                         readyInMinutes: res['readyInMinutes'],
                     } 
             }
-        } else {
-            @results={0001: "No recipes found"}
-        }
+        else
+            @results={"0001": "No recipes found"}
+        end
         puts @results
         @results
-        }
     end
 
     def self.request_recipe(id)
