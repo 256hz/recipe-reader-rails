@@ -40,7 +40,7 @@ class Fetcher
     end
 
     def self.request_recipe(id)
-        HTTParty.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/592863/information", 
+        HTTParty.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/#{id}/information", 
             headers: 
                 {
                     "X-RapidAPI-Host" => "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -51,9 +51,9 @@ class Fetcher
 
     def self.get_recipe(id)
         # Replace @bacon_brussels_sprouts with the next line to hit the API
-        # response = self.request_recipe(id).body 
-        response = @bacon_brussels_sprouts
-        # puts response
+        response = self.request_recipe(id) 
+        # response = @bacon_brussels_sprouts
+        puts response
         @recipe = self.create_recipe(response)
         @ingredients = self.create_ingredients(response, @recipe.id)
         # puts "*"*50, "ingredient spoon ids", @ingredients.each{|i| i.spoon_id}, "*"*50
@@ -64,6 +64,7 @@ class Fetcher
     end
 
     def self.create_recipe(response)
+        # byebug
         @recipe = Recipe.create(
             spoon_id:           response['id'],
             title:              response['title'],

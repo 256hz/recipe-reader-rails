@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :ingredients
       get '/spoon', to: 'spoon#index'
       get '/spoon/:query', to: 'spoon#search'
+      get '/spoon/recipe/:id', to: 'spoon#show'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
