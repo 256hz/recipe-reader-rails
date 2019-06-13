@@ -7,10 +7,10 @@ class Api::V1::RecipesController < ApplicationController
     def show
         @recipe = Recipe.all.find_by(spoon_id: params[:id])
         if @recipe
-            render json: @recipe
+            render json: @recipe.steps
         else
             @recipe = Fetcher.get_recipe(params[:id])
-            render json: @recipe
+            render json: @recipe.steps
         end
     end
 end
