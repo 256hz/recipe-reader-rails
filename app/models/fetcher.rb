@@ -91,9 +91,9 @@ class Fetcher
                 spoon_id:       ingred['id'],
                 recipe_id:      id,
                 name:           name,
-                metric_amount:  round_to_fraction(ingred['measures']['metric']['amount']),
+                metric_amount:  self.round_to_fraction(ingred['measures']['metric']['amount']),
                 metric_unit:    ingred['measures']['metric']['unitShort'],
-                us_amount:      round_to_fraction(ingred['measures']['us']['amount']),
+                us_amount:      self.round_to_fraction(ingred['measures']['us']['amount']),
                 us_unit:        ingred['measures']['us']['unitShort'],
                 image_url:      ingred['image'],
             )
@@ -103,7 +103,7 @@ class Fetcher
         ingredients
     end
 
-    def round_to_fraction(float, denominator=4)
+    def self.round_to_fraction(float, denominator=4)
         (float * denominator).round.to_f/denominator
     end
 
