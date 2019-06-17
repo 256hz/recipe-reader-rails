@@ -86,17 +86,21 @@ class Fetcher
         ingredients = []
         response['extendedIngredients'].each do |ingred|
             # puts "ingredient:", ingred['name'], 'spoon_id:', ingred['id']
-            name = self.filter_name(ingred['name'])
-            @ingred = Ingredient.create!(
-                spoon_id:       ingred['id'],
-                recipe_id:      id,
-                name:           name,
-                metric_amount:  self.round_to_fraction(ingred['measures']['metric']['amount']),
-                metric_unit:    ingred['measures']['metric']['unitShort'],
-                us_amount:      self.round_to_fraction(ingred['measures']['us']['amount']),
-                us_unit:        ingred['measures']['us']['unitShort'],
-                image_url:      ingred['image'],
-            )
+            @ingred = Ingredient.all.find_by(spoon_id: ingred['id'])
+            if @ingred.nil?
+                name = self.filter_name(ingred['name'])
+                @ingred = Ingredient.create!(
+                    spoon_id:         ingred['id'],
+                    recipe_id:        id,
+                    name:             name,
+                    original_string:  ingred["originalString"]
+                    metric_amount:    self.round_to_fraction(ingred['measures']['metric']['amount']),
+                    metric_unit:      ingred['measures']['metric']['unitShort'],
+                    us_amount:        self.round_to_fraction(ingred['measures']['us']['amount']),
+                    us_unit:          ingred['measures']['us']['unitShort'],
+                    image_url:        ingred['image'],
+                )
+            end
             # puts "created ingredient id:", @ingred.id
             ingredients.push(@ingred)
         end
