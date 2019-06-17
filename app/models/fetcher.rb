@@ -61,7 +61,7 @@ class Fetcher
         # puts "*"*50, "step spoon ids", @steps.each{|s| s.spoon_ids}, "*"*50
         self.associate_step_ingredients(@steps)
         @recipe
-    end 
+    end
 
     def self.create_recipe(response)
         # byebug
@@ -91,9 +91,9 @@ class Fetcher
                 spoon_id:       ingred['id'],
                 recipe_id:      id,
                 name:           name,
-                metric_amount:  ingred['measures']['metric']['amount'],
+                metric_amount:  round_to_fraction(ingred['measures']['metric']['amount']),
                 metric_unit:    ingred['measures']['metric']['unitShort'],
-                us_amount:      ingred['measures']['us']['amount'],
+                us_amount:      round_to_fraction(ingred['measures']['us']['amount']),
                 us_unit:        ingred['measures']['us']['unitShort'],
                 image_url:      ingred['image'],
             )
@@ -101,6 +101,10 @@ class Fetcher
             ingredients.push(@ingred)
         end
         ingredients
+    end
+
+    def round_to_fraction(float, denominator=4)
+        (float * denominator).round.to_f/denominator
     end
 
     def self.filter_name(name)
