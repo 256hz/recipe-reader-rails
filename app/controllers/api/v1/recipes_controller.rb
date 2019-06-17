@@ -13,4 +13,10 @@ class Api::V1::RecipesController < ApplicationController
             render json: @recipe.steps.sort_by(&:step_no)
         end
     end
+
+    def ingredients
+        @recipe = Fetcher.get_recipe(params[:id])
+        @ingredients = Ingredient.all.filter{|i| i.recipe_id == @recipe.id}
+        render json: @ingredients
+    end
 end

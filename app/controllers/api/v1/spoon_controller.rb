@@ -13,5 +13,5 @@ class Api::V1::SpoonController < ApplicationController
     @recipe = Fetcher.get_recipe(params[:id])
     render json: @recipe
   end
-  
+
 end
