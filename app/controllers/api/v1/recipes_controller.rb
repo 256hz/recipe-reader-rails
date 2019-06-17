@@ -16,16 +16,14 @@ class Api::V1::RecipesController < ApplicationController
 
     def show
         @recipe = Recipe.all.find_by(spoon_id: params[:id])
-        if @recipe
-            render json: @recipe
-        else
-            @recipe = Fetcher.get_recipe(params[:id])
-            render json: @recipe
-        end
+        @recipe = Fetcher.get_recipe(params[:id]) if @recipe.nil? 
+        render json: @recipe
     end
 
     def ingredients
-        @recipe = Fetcher.get_recipe(params[:id])
+        @recipe = Recipe.all.find_by(spoon_id: params[:id])
+        @recipe = Fetcher.get_recipe(params[:id]) if @recipe.nil? 
+
         @ingredients = Ingredient.all.filter{|i| i.recipe_id == @recipe.id}
         render json: @ingredients
     end

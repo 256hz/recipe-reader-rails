@@ -74,7 +74,6 @@ class Fetcher
             is_vegan:           response['vegan'],
             source_name:        response['sourceName'],
             likes:              response['aggregateLikes'],
-            steps_length:       response['analyzedInstructions'][0]['steps'].length,
             cuisines:           response['cuisines'],
             servings:           response['servings'],
             dish_types:         response['dishTypes'],
@@ -90,15 +89,15 @@ class Fetcher
             if @ingred.nil?
                 name = self.filter_name(ingred['name'])
                 @ingred = Ingredient.create!(
-                    spoon_id:         ingred['id'],
-                    recipe_id:        id,
-                    name:             name,
-                    original_string:  ingred["originalString"]
-                    metric_amount:    self.round_to_fraction(ingred['measures']['metric']['amount']),
-                    metric_unit:      ingred['measures']['metric']['unitShort'],
-                    us_amount:        self.round_to_fraction(ingred['measures']['us']['amount']),
-                    us_unit:          ingred['measures']['us']['unitShort'],
-                    image_url:        ingred['image'],
+                    spoon_id:       ingred['id'],
+                    recipe_id:      id,
+                    name:           name,
+                    orig_string:    ingred["originalString"],
+                    metric_amount:  self.round_to_fraction(ingred['measures']['metric']['amount']),
+                    metric_unit:    ingred['measures']['metric']['unitShort'],
+                    us_amount:      self.round_to_fraction(ingred['measures']['us']['amount']),
+                    us_unit:        ingred['measures']['us']['unitShort'],
+                    image_url:      ingred['image'],
                 )
             end
             # puts "created ingredient id:", @ingred.id

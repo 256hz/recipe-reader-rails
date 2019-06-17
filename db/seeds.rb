@@ -3,8 +3,8 @@ Step.destroy_all
 Ingredient.destroy_all
 StepIngredient.destroy_all
 
-# Fetcher.get_recipe(320451)
-# Fetcher.get_recipe(829385)
+Fetcher.get_recipe(224260)
+Fetcher.get_recipe(285223)
 Fetcher.get_recipe(11021)
 
 # recipe1=Recipe.create!( 
