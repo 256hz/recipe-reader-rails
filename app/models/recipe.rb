@@ -1,9 +1,6 @@
 class Recipe < ApplicationRecord
     has_many :steps
-    has_many :ingredients
-
-    def self.send_steps(recipe)
-        puts recipe
-    end
+    has_many :recipe_ingredients
+    has_many :ingredients, through: :recipe_ingredients
 end
  

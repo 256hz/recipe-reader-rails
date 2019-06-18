@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :recipes, except: [:update, :delete]
+      resources :recipes, except: [:create, :update, :delete]
       get 'recipes/:id/ingredients', to: 'recipes#ingredients'
       get 'recipes/:id/steps', to: 'recipes#steps'
-      resources :steps, except: [:update, :delete]
-      resources :ingredients, except: [:update, :delete]
+      
+      resources :steps, except: [:create, :update, :delete]
+      
+      resources :ingredients, except: [:create, :update, :delete]
+      
       get '/spoon', to: 'spoon#index'
       get '/spoon/:query', to: 'spoon#search'
       get '/spoon/recipe/:id', to: 'spoon#show'
