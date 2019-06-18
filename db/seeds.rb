@@ -5,7 +5,7 @@ StepIngredient.destroy_all
 
 Fetcher.get_recipe(224260)
 Fetcher.get_recipe(285223)
-Fetcher.get_recipe(11021)
+Fetcher.get_recipe(400981)
 
 # recipe1=Recipe.create!( 
 #     spoon_id: 479101,
