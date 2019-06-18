@@ -84,13 +84,12 @@ class Fetcher
     def self.create_ingredients(response, id)
         ingredients = []
         response['extendedIngredients'].each do |ingred|
-            # puts "ingredient:", ingred['name'], 'spoon_id:', ingred['id']
+            puts "ingredient:", ingred['name'], 'spoon_id:', ingred['id']
             @ingred = Ingredient.all.find_by(spoon_id: ingred['id'])
             if @ingred.nil?
                 name = self.filter_name(ingred['name'])
                 @ingred = Ingredient.create!(
                     spoon_id:       ingred['id'],
-                    recipe_id:      id,
                     name:           name,
                     orig_string:    ingred["originalString"],
                     metric_amount:  self.round_to_fraction(ingred['measures']['metric']['amount']),
@@ -100,7 +99,11 @@ class Fetcher
                     image_url:      ingred['image'],
                 )
             end
-            # puts "created ingredient id:", @ingred.id
+            ri = RecipeIngredient.create!(
+                recipe_id: @recipe.id, 
+                ingredient_id: @ingred.id
+            )
+            puts "created recipe_ingredient id:", ri.id
             ingredients.push(@ingred)
         end
         ingredients
