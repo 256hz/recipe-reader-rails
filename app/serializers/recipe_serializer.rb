@@ -5,5 +5,5 @@ class RecipeSerializer < ActiveModel::Serializer
     :ready_in_minutes, :servings,
     :source_name, :likes,
     :cuisines, :dish_types,
-    :ingredients
+    :ingredients, :steps
 end
