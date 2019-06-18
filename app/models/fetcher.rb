@@ -99,7 +99,7 @@ class Fetcher
                     image_url:      ingred['image'],
                 )
             end
-            ri = RecipeIngredient.create!(
+            ri = RecipeIngredient.find_or_create_by(
                 recipe_id: @recipe.id, 
                 ingredient_id: @ingred.id
             )
