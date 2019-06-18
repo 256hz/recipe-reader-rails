@@ -55,7 +55,7 @@ class Fetcher
         # response = @bacon_brussels_sprouts
         puts response
         @recipe = self.create_recipe(response)
-        @ingredients = self.create_ingredients(response, @recipe.id)
+        @ingredients = self.create_ingredients(response, @recipe)
         # puts "*"*50, "ingredient spoon ids", @ingredients.each{|i| i.spoon_id}, "*"*50
         @steps = self.create_steps(response, @recipe.id, @ingredients)
         # puts "*"*50, "step spoon ids", @steps.each{|s| s.spoon_ids}, "*"*50
@@ -66,27 +66,28 @@ class Fetcher
     def self.create_recipe(response)
         # byebug
         @recipe = Recipe.create(
-            spoon_id:           response['id'],
-            title:              response['title'],
+            cuisines:           response['cuisines'],
+            dish_types:         response['dishTypes'],
             image_url:          response['image'],
-            ready_in_minutes:   response['readyInMinutes'],
             is_vegetarian:      response['vegetarian'],
             is_vegan:           response['vegan'],
-            source_name:        response['sourceName'],
             likes:              response['aggregateLikes'],
-            cuisines:           response['cuisines'],
+            ready_in_minutes:   response['readyInMinutes'],
             servings:           response['servings'],
-            dish_types:         response['dishTypes'],
+            spoon_id:           response['id'],
+            source_name:        response['sourceName'],
+            source_url:         response['sourceUrl'],
+            title:              response['title'],
         )
         @recipe
     end
    
-    def self.create_ingredients(response, id)
+    def self.create_ingredients(response, recipe)
         ingredients = []
         response['extendedIngredients'].each do |ingred|
             puts "ingredient:", ingred['name'], 'spoon_id:', ingred['id']
             @ingred = Ingredient.all.find_by(spoon_id: ingred['id'])
-            if @ingred.nil?
+            if @ingred.nil? || @recipe.ingredients.map(&:spoon_id).include?(ingred['id'])
                 name = self.filter_name(ingred['name'])
                 @ingred = Ingredient.create!(
                     spoon_id:       ingred['id'],
@@ -100,7 +101,7 @@ class Fetcher
                 )
             end
             ri = RecipeIngredient.find_or_create_by(
-                recipe_id: @recipe.id, 
+                recipe_id: recipe.id, 
                 ingredient_id: @ingred.id
             )
             puts "created recipe_ingredient id:", ri.id
