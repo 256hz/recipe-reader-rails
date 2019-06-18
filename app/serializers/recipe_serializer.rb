@@ -10,8 +10,8 @@ class RecipeSerializer < ActiveModel::Serializer
     :ready_in_minutes, 
     :servings,
     :source_name, 
-    :steps
+    :steps,
     :source_url,
     :spoon_id,
-    :title, 
+    :title
 end
