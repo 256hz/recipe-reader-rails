@@ -6,3 +6,4 @@ class Recipe < ApplicationRecord
         puts recipe
     end
 end
+ 
