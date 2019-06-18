@@ -19,7 +19,6 @@ class Api::V1::RecipesController < ApplicationController
     def ingredients
         @recipe = Recipe.all.find_by(spoon_id: params[:id])
         @recipe = Fetcher.get_recipe(params[:id]) if @recipe.nil? 
-
         render json: @recipe.ingredients
     end
 end
