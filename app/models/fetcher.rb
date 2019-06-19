@@ -51,14 +51,14 @@ class Fetcher
 
     def self.get_recipe(id)
         # Replace @bacon_brussels_sprouts with the next line to hit the API
-        response = self.request_recipe(id) 
         # response = @bacon_brussels_sprouts
+
+        response = self.request_recipe(id) 
         puts response
+
         @recipe = self.create_recipe(response)
         @ingredients = self.create_ingredients(response, @recipe)
-        # puts "*"*50, "ingredient spoon ids", @ingredients.each{|i| i.spoon_id}, "*"*50
         @steps = self.create_steps(response, @recipe.id, @ingredients)
-        # puts "*"*50, "step spoon ids", @steps.each{|s| s.spoon_ids}, "*"*50
         self.associate_step_ingredients(@steps)
         @recipe
     end
@@ -122,6 +122,32 @@ class Fetcher
         name
     end
 
+    def self.create_equipment(equipment, recipe_id, step_id)
+        puts 'creating equipment'
+        puts equipment, recipe_id, step_id
+        equipment.each{|item|
+            puts "item:", item
+            @equip = Equipment.find_by(spoon_id: item['id'])
+            if @equip.nil?
+                puts 'equipment not found, creating:', item['id'], item['name'], item['image']
+                @equip = Equipment.create!(
+                    spoon_id: item['id'],
+                    name: item['name'],
+                    image_url: item['image']
+                )
+                puts 'equip created:', @equip
+            end
+            RecipeEquipment.find_or_create_by!(
+                equipment_id: @equip.id,
+                recipe_id: recipe_id
+            )
+            StepEquipment.create!(
+                equipment_id: @equip.id,
+                step_id: step_id
+            )
+        }
+    end
+
     def self.create_steps(response, id, ingredients)
         steps = []
         # byebug
@@ -134,7 +160,8 @@ class Fetcher
                 step_no:        step['number'],
                 text:           step['step'],
                 spoon_ids:      step_spoon_ids
-            )
+                )
+            self.create_equipment(step["equipment"], id, @step.id) if step['equipment']
             steps.push(@step)
         end
         steps
@@ -144,7 +171,7 @@ class Fetcher
         spoon_ids = []
         puts "Searching: #{text}"
         ingredients.each {|i|
-            split_name = i.name.split
+            split_name = i.name.downcase.split
             # puts "Looking for: #{i.name} or #{split_name}"
             if text.downcase.include?(i.name)
                 spoon_ids << i.spoon_id
