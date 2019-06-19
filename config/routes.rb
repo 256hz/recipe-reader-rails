@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :recipes, except: [:create, :update, :delete]
       get 'recipes/:id/ingredients', to: 'recipes#ingredients'
+      get 'recipes/:id/equipment', to: 'recipes#equipment'
       get 'recipes/:id/steps', to: 'recipes#steps'
       
       resources :steps, except: [:create, :update, :delete]
