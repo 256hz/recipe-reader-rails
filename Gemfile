@@ -29,9 +29,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'httparty'
-gem 'oauth', '~> 0.5.4'
-gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'google-cloud-text_to_speech'
+gem 'googleauth'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
