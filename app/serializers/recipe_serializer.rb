@@ -1,6 +1,7 @@
 class RecipeSerializer < ActiveModel::Serializer
   attributes :cuisines, 
     :dish_types,
+    :equipments,
     :ingredients, 
     :id, 
     :image_url,

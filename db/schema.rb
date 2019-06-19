@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_234553) do
+ActiveRecord::Schema.define(version: 2019_06_19_003913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "equipments", force: :cascade do |t|
+    t.integer "spoon_id"
+    t.string "name"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "ingredients", force: :cascade do |t|
     t.integer "spoon_id"
@@ -26,6 +34,13 @@ ActiveRecord::Schema.define(version: 2019_06_18_234553) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "orig_string"
+  end
+
+  create_table "recipe_equipments", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "equipment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|
@@ -52,6 +67,13 @@ ActiveRecord::Schema.define(version: 2019_06_18_234553) do
     t.string "source_url"
   end
 
+  create_table "step_equipments", force: :cascade do |t|
+    t.integer "step_id"
+    t.integer "equipment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "step_ingredients", force: :cascade do |t|
     t.integer "step_id"
     t.integer "ingredient_id"
@@ -66,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_06_18_234553) do
     t.datetime "updated_at", null: false
     t.integer "step_no"
     t.string "spoon_ids", default: [], array: true
+    t.string "equipment_ids", default: [], array: true
   end
 
 end

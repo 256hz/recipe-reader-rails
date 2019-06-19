@@ -1,6 +1,10 @@
-Recipe.destroy_all
-Step.destroy_all
+Equipment.destroy_all
 Ingredient.destroy_all
+RecipeEquipment.destroy_all
+RecipeIngredient.destroy_all
+Recipe.destroy_all
+StepEquipment.destroy_all
 StepIngredient.destroy_all
+Step.destroy_all
 
 Fetcher.get_recipe(519078)
