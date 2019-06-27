@@ -1,6 +1,6 @@
 # RECIPE READER
 
-<image src="/public/images/title-screen.jpg" width="215px"/> <image src="/public/images/search-results.jpg" width="215px" /> <image src="/public/images/step.jpg" width="215px" /> <image src="/public/images/done.jpg" width="215px" />
+<image src="/public/images/title-screen.jpg" width="213px"/> <image src="/public/images/search-results.jpg" width="213px" /> <image src="/public/images/step.jpg" width="213px" /> <image src="/public/images/done.jpg" width="213px" />
 
 ### Overview
 
