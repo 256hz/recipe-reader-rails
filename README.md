@@ -4,7 +4,7 @@
 
 ### Overview
 
-If you like to cook, you have probably been through the following scenario: you find a recipe on your phone, get in deep, and have to stop, wash your hands, unlock your phone, and scroll around to find the next step, for what seems like hundreds of times.  This app solves that problem!  Now you can find a great recipe, and once you start cooking, you won't have to touch your phone at all*.  
+If you like to cook, you have probably been through the following scenario: you find a recipe on your phone, get in deep, and have to stop, wash your hands, unlock your phone, and scroll around to find the next step, for what seems like hundreds of times.  This mobile app solves that problem!  Now you can find a great recipe, and once you start cooking, let Recipe Reader lead you through the recipe aloud, line by line.  
 
 This repo is the Ruby on Rails API backend for the [React Native mobile app](https://github.com/256hz/recipe-reader-react-v4).  It interfaces with the Spoonacular API to find recipes, get ingredients, and parse recipe steps.
 
@@ -15,7 +15,7 @@ This repo is the Ruby on Rails API backend for the [React Native mobile app](htt
 - From the root directory, run `bundle install && rails db:setup && rails db:migrate`.
 - Get a [Spoonacular API key](https://spoonacular.com/api/docs/recipes-api).  Side note, the Spoonacular API is a best-in-class product and the team deserves great praise.  This app wouldn't be possible without their service.
 - Once you have your API key, store it in the environment variable `SPOONACULAR_API_KEY`.  A guide to setting environment variables in OSX can be found [here](https://medium.com/@himanshuagarwal1395/setting-up-environment-variables-in-macos-sierra-f5978369b255).
-- In your terminal, run `rails db:seed`.  This fetches a single recipe from the API via the `Fetcher` model (`/app/models/Fetcher.rb`). Fetcher then breaks it down into a `Recipe`, `Ingredients`, `Equipments`, and `Steps`, and associates them through various join tables.
+- In your terminal, run `rails db:seed`.  This fetches a single recipe from the API via the `Fetcher` model (`/app/models/Fetcher.rb`). Fetcher then breaks it down into a `Recipe`, `Ingredients`, `Equipments`, and `Steps`, and associates them through their join tables.
 - Run `rails s`, and load `http://localhost:3000/api/v1/recipes` in your browser.  
   - In `/config/routes.rb`, everything has been `namespace`d inside `api/v1/`.  If you don't wish to follow this convention, simply remove the two `namespace` method calls.  
 - The output from `/recipes/` should look something like this:
