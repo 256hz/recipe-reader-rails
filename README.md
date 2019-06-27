@@ -1,6 +1,6 @@
 # RECIPE READER
 
-<image src="/public/images/title-screen.png" /><image src="/public/images/search-results.png" /><image src="/public/images/step.png" /><image src="/public/images/done.png" />
+<image src="/public/images/title-screen.jpg" width="215px"/><image src="/public/images/search-results.jpg" width="215px" /><image src="/public/images/step.jpg" width="215px" /><image src="/public/images/done.jpg" width="215px" />
 
 ### Overview
 
@@ -24,7 +24,7 @@ This repo is the Ruby on Rails API backend for the [React Native mobile app](htt
 
 Once you get back good responses, you can host and create your remote database.  
 
-- Upload to hosting (for example, [Heroku](http://www.heroku.com).  A good guide to deploying a Rails/React app on Heroku can be found [here](https://medium.com/coding-in-simple-english/deploying-rails-react-app-to-heroku-35e1829242ab).
+- Upload to hosting (for example, [Heroku](http://www.heroku.com).  A good guide to deploying a Rails/React app on Heroku can be found [here](https://medium.com/coding-in-simple-english/deploying-rails-react-app-to-heroku-35e1829242ab)).
 - If you're on Heroku, run `heroku login`, then `heroku run rails db:migrate && heroku run rails db:seed`.  
   - There's no need to run `db:setup`, as Heroku takes care of this step for you.
 - Test your API endpoints as you did locally.
@@ -40,3 +40,6 @@ I am adding a number of features, including:
 - Search filters
 - Tumbler(not Tumblr)-style step navigation
 - Speech on/off control
+
+### Thanks!
+--Abe ([@256hertz](http://twitter.com/256hertz))
