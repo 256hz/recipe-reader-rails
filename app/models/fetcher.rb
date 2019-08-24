@@ -172,20 +172,23 @@ class Fetcher
     # Sometimes, the API returns different ingredients in the step than it does in
     # the Recipe's extendedIngredients field (e.g., cherry jam vs. raspberry).
     # This searches the ingredients list for names that match, i.e., cherry jam
-    # would match rasbperry jam due to the common word 'jam'.  Very janky that
-    # this would cause problems with multiple types of the same ingredient, but
-    # practically hasn't been a huge problem thus far.
+    # would match rasbperry jam due to the common word 'jam'.  Very janky in that
+    # this causes problems with multiple types of the same ingredient, but that
+    # isn't super common. 
     spoon_ids = []
     # puts "Searching: #{text}"
     ingredients.each do |i|
       # puts "Looking for: #{i.name}"
-      spoon_ids << i.spoon_id if text.downcase.include?(i.name)
-      
+      # Checks for an exact match in the ingredients list.
+      if text.downcase.include?(i.name)
+        spoon_ids << i.spoon_id 
       # puts "found, inserting: #{i.name}, #{i.spoon_id}"
-      split_name = i.name.downcase.split
-      split_name.each do |word|
-        spoon_ids << i.spoon_id if text.include?(word) && !spoon_ids.include?(i.spoon_id)
-        # puts "found, inserting: #{i.name}, #{i.spoon_id}"
+      else
+        split_name = i.name.downcase.split
+        split_name.each do |word|
+          spoon_ids << i.spoon_id if text.include?(word) && !spoon_ids.include?(i.spoon_id)
+          # puts "found, inserting: #{i.name}, #{i.spoon_id}"
+        end
       end
     end
     # puts "spoon_ids: #{spoon_ids}"
@@ -193,8 +196,9 @@ class Fetcher
   end
 
   def self.associate_step_ingredients(steps)
-    puts 'Associating steps with ingredients'
+    # Finally, we can associate the Steps with their Ingredients.
     steps.each do |step_i|
+      # puts "Associating #{step_i} with ids: #{step_i['spoon_ids']}"
       next if step_i['spoon_ids'] == []
 
       # puts " Step spoon_ids: #{ step_i['spoon_ids'] } "
