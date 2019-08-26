@@ -1,8 +1,18 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe 'all recipes route' do
-  it 'should return a list of all recipes from /api/v1/recipes' do
+feature 'Recipes index (spoon#index)' do
+  scenario 'Root should redirect to API root' do
+    visit '/'
+    expect(page).to have_content('Recipe Reader')
+  end
+
+  scenario 'API root should display app title' do
+    visit '/api/v1/'
+    expect(page).to have_content('Recipe Reader')
+  end
+
+  scenario 'Return a list of all recipes from /api/v1/spoon' do
     visit '/api/v1/spoon'
-    page.should have_content('cuisines')
+    expect(page).to have_content('cuisines')
   end
 end

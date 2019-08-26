@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  get '/', to: redirect('api/v1/')
+
   namespace :api do
     namespace :v1 do
+      get '/', to: 'index#index'
+
       resources :recipes, except: [:create, :update, :delete]
       get 'recipes/:id/ingredients', to: 'recipes#ingredients'
       get 'recipes/:id/equipment', to: 'recipes#equipment'
