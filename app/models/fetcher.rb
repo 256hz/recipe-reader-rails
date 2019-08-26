@@ -18,23 +18,27 @@ class Fetcher
     ENV.fetch('SPOONACULAR_API_KEY')
   end
 
+  def recipe_search(query)
+    response = request_search(query)
+    return_search_results(response)
+  end
+
   def self.request_search(query)
-    # Performs Spoonacular(S11r)'s 'complex recipe' search, since simple search seems to be down.
-    # Returns JSON results that include complex instructions, i.e., step associations.
+    # Performs Spoonacular(S11r)'s 'complex recipe' search -- simple search seems to be down.
+    # Returns JSON results that include instructions with step associations.
     HTTParty.get(
-      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex' + 
+      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex' +
       "?query=#{query}&instructionsRequired=true",
       headers: { 'X-RapidAPI-Host' => 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
                  'X-RapidAPI-Key' => key }
     )
   end
 
-  def self.search(query)
-    # Searches for recipes from S11r and returns them in a @results hash.  
-    response = request_search(query)
+  def self.return_search_results(response)
+    # Searches for recipes from S11r and returns them in a @results hash.
     if response
       @results = {}
-      response['results'].each do |res|
+      response.each do |res|
         @results[res['title']] = { id: res['id'], 
                                    image_url: res['image'],
                                    readyInMinutes: res['readyInMinutes'] }
