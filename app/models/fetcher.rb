@@ -3,7 +3,7 @@ require 'httparty'
 # Calls the Spoonacular API for recipe search and recipe steps.
 # Order of operations:
 # SEARCH: search, request_search
-# STEPS:
+# RECIPE:
 #   get_recipe
 #     request_recipe
 #     create_recipe
@@ -11,9 +11,10 @@ require 'httparty'
 #     create_steps
 #       get_spoon_ids
 #     associate_step_ingredients
+
 class Fetcher
   def self.key
-    # For returning the API key from memory
+    # Returns the API key from the environment
     ENV.fetch('SPOONACULAR_API_KEY')
   end
 
