@@ -39,7 +39,7 @@ class Fetcher
     if response
       @results = {}
       response.each do |res|
-        @results[res['title']] = { id: res['id'], 
+        @results[res['title']] = { id: res['id'],
                                    image_url: res['image'],
                                    readyInMinutes: res['readyInMinutes'] }
       end
