@@ -3,7 +3,7 @@ require 'httparty'
 # Calls the Spoonacular API for recipe search and recipe steps.
 # Order of operations:
 # SEARCH: search, request_search
-# STEPS:
+# RECIPE:
 #   get_recipe
 #     request_recipe
 #     create_recipe
@@ -11,30 +11,35 @@ require 'httparty'
 #     create_steps
 #       get_spoon_ids
 #     associate_step_ingredients
+
 class Fetcher
   def self.key
-    # For returning the API key from memory
+    # Returns the API key from the environment
     ENV.fetch('SPOONACULAR_API_KEY')
   end
 
+  def recipe_search(query)
+    response = request_search(query)
+    return_search_results(response)
+  end
+
   def self.request_search(query)
-    # Performs Spoonacular(S11r)'s 'complex recipe' search, since simple search seems to be down.
-    # Returns JSON results that include complex instructions, i.e., step associations.
+    # Performs Spoonacular(S11r)'s 'complex recipe' search -- simple search seems to be down.
+    # Returns JSON results that include instructions with step associations.
     HTTParty.get(
-      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex' + 
+      'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/searchComplex' +
       "?query=#{query}&instructionsRequired=true",
       headers: { 'X-RapidAPI-Host' => 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
                  'X-RapidAPI-Key' => key }
     )
   end
 
-  def self.search(query)
-    # Searches for recipes from S11r and returns them in a @results hash.  
-    response = request_search(query)
+  def self.return_search_results(response)
+    # Searches for recipes from S11r and returns them in a @results hash.
     if response
       @results = {}
-      response['results'].each do |res|
-        @results[res['title']] = { id: res['id'], 
+      response.each do |res|
+        @results[res['title']] = { id: res['id'],
                                    image_url: res['image'],
                                    readyInMinutes: res['readyInMinutes'] }
       end
@@ -88,7 +93,6 @@ class Fetcher
 
   def self.create_ingredients(response, recipe)
     # Makes Ingredients if they don't already exist.  Associates all with the Recipe.
-    # 
     ingredients = []
     response['extendedIngredients'].each do |ingred|
       # puts "ingredient:", ingred['name'], 'spoon_id:', ingred['id']
@@ -131,7 +135,7 @@ class Fetcher
   def self.create_steps(response, recipe_id, ingredients)
     # Creates Steps from the response and associates ingredents & recipe.
     # If the step has equipment, it creates it below in create_equipment.
-    # I don't love that the create_equipment call is nested in this function,
+    # I don't like that the create_equipment call is coupled this function,
     # good refactor target.
     steps = []
     response['analyzedInstructions'][0]['steps'].each do |step|
@@ -167,14 +171,14 @@ class Fetcher
       StepEquipment.create!(equipment_id: @equip.id, step_id: step_id)
     end
   end
-  
+
   def self.get_spoon_ids(text, ingredients)
     # Sometimes, the API returns different ingredients in the step than it does in
     # the Recipe's extendedIngredients field (e.g., cherry jam vs. raspberry).
     # This searches the ingredients list for names that match, i.e., cherry jam
     # would match rasbperry jam due to the common word 'jam'.  Very janky in that
     # this causes problems with multiple types of the same ingredient, but that
-    # isn't super common. 
+    # isn't super common.
     spoon_ids = []
     # puts "Searching: #{text}"
     ingredients.each do |i|
