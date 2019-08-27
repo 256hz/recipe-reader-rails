@@ -1,8 +1,4 @@
 class Api::V1::SpoonController < ApplicationController
-  def index
-    @recipes = Recipe.all
-    render json: @recipes
-  end
 
   def search
     @results = Fetcher.search(params[:query])

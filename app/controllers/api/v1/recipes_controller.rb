@@ -25,8 +25,8 @@ class Api::V1::RecipesController < ApplicationController
 
   private
     def find_recipe
-      @recipe = Recipe.all.find_by(spoon_id: params[:id])
-      @recipe = Fetcher.get_recipe(params[:id]) if @recipe.nil?
+      @recipe = Recipe.all.find_by(spoon_id: params[:id]) ||
+                Fetcher.get_recipe(params[:id])
     end
 
 end
