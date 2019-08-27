@@ -18,9 +18,9 @@ class Fetcher
     ENV.fetch('SPOONACULAR_API_KEY')
   end
 
-  def recipe_search(query)
-    response = request_search(query)
-    return_search_results(response)
+  def self.recipe_search(query)
+    responses = request_search(query)
+    return_search_results(responses['results'])
   end
 
   def self.request_search(query)
@@ -34,20 +34,17 @@ class Fetcher
     )
   end
 
-  def self.return_search_results(response)
+  def self.return_search_results(responses)
     # Searches for recipes from S11r and returns them in a @results hash.
-    if response
-      @results = {}
-      response.each do |res|
-        @results[res['title']] = { id: res['id'],
-                                   image_url: res['image'],
-                                   readyInMinutes: res['readyInMinutes'] }
+    if responses
+      responses.each_with_object({}) do |response, hash|
+        hash[response['title']] = { id: response['id'],
+                                    image_url: response['image'],
+                                    readyInMinutes: response['readyInMinutes'] }
       end
     else
-      @results = { 'None' => 'No recipes found' }
+      { 'None' => 'No recipes found' }
     end
-    # puts @results
-    @results
   end
 
   def self.get_recipe(id)
@@ -175,7 +172,7 @@ class Fetcher
   def self.get_spoon_ids(text, ingredients)
     # Sometimes, the API returns different ingredients in the step than it does in
     # the Recipe's extendedIngredients field (e.g., cherry jam vs. raspberry).
-    # This searches the ingredients list for names that match, i.e., cherry jam
+    # This searches the ingredients list for word matches, i.e., cherry jam
     # would match rasbperry jam due to the common word 'jam'.  Very janky in that
     # this causes problems with multiple types of the same ingredient, but that
     # isn't super common.
